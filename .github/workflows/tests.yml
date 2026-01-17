@@ -16,5 +16,18 @@ jobs:
       - run: poetry install
       - run: poetry run pytest tests/api
 
+  ui:
+    runs-om: ubuntu-latest
+    steps:
+      - users: sctions/chckout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install poetry
+      - run: poetry install
+      - run: poetry run pytest tests/ui -m smoke
+        env:
+          HEADLESS: "true"
+
 
   
