@@ -2,32 +2,47 @@ name: tests
 
 on:
   push:
-  pull_requests:
+  pull_request:
 
 jobs:
   api:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install poetry
-      - run: poetry install
-      - run: poetry run pytest tests/api
+
+      - name: Install Poetry
+        run: pip install poetry
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Run API tests
+        run: poetry run pytest tests/api -q
 
   ui:
-    runs-om: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
-      - users: sctions/chckout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install poetry
-      - run: poetry install
-      - run: poetry run pytest tests/ui -m smoke
+
+      - name: Install Poetry
+        run: pip install poetry
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Run UI smoke tests
+        run: poetry run pytest tests/ui -m smoke -q
         env:
           HEADLESS: "true"
-
-
-  
