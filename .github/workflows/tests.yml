@@ -20,7 +20,7 @@ jobs:
         run: pip install poetry
 
       - name: Install dependencies
-        run: poetry install
+        run: poetry install --no-root
 
       - name: Run API tests
         run: poetry run pytest tests/api -q
@@ -40,7 +40,7 @@ jobs:
         run: pip install poetry
 
       - name: Install dependencies
-        run: poetry install
+        run: poetry install --no-root
 
       - name: Run UI smoke tests
         run: poetry run pytest tests/ui -m smoke -q
